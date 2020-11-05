@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=2000)
+    title = models.CharField(max_length=1500)
     is_completed = models.BooleanField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
