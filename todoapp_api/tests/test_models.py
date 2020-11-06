@@ -16,6 +16,10 @@ class TaskModelTestCase(TestCase):
         max_length = self.task._meta.get_field('title').max_length
         self.assertEqual(max_length, 1500)
 
+    def test_is_completed_field(self):
+        default = self.task._meta.get_field('is_completed').default
+        self.assertEqual(default, False)
+
     def test_user_field(self):
         related_model = self.task._meta.get_field('user').related_model
         self.assertEqual(related_model, User)
