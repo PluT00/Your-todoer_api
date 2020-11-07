@@ -1,5 +1,5 @@
 from django.contrib import admin
-from todoapp_api.models import Task
+from your_todoer_api.models import Task
 
 
 class TaskAdmin(admin.ModelAdmin):

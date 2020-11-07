@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from todoapp_api.models import Task
+from your_todoer_api.models import Task
 
 
 class TaskModelTestCase(TestCase):
