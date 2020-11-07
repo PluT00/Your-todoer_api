@@ -10,7 +10,7 @@ class TaskModelTestCase(TestCase):
         self.user = User.objects.create_user(username="test", password="test")
         self.task = Task.objects.create(
             title="test_task", is_completed=False, user=self.user
-        )
+            )
 
     def test_title_field(self):
         max_length = self.task._meta.get_field('title').max_length
@@ -28,4 +28,4 @@ class TaskModelTestCase(TestCase):
         self.assertEqual(
             self.task.__str__(),
             f'{self.task.id} | {self.task.title}'
-        )
+            )
