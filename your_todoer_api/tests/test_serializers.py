@@ -4,7 +4,9 @@ from django.db.utils import IntegrityError
 from rest_framework import serializers
 
 from your_todoer_api.models import Task, Project
-from your_todoer_api.serializers import UserSerializer, TaskSerializer
+from your_todoer_api.serializers import (UserSerializer,
+                                         TaskSerializer,
+                                         ProjectSerializer)
 
 
 class TaskSerializerTestCase(TestCase):
@@ -25,7 +27,8 @@ class TaskSerializerTestCase(TestCase):
     def test_contains_expected_fields(self):
         data = self.serializer.data
         self.assertEqual(set(data.keys()),
-                             set(['id', 'title', 'is_completed', 'owner']))
+                         set(['id', 'title', 'is_completed', 'project',
+                              'owner']))
 
     def test_title_field(self):
         data = self.serializer.data
@@ -38,7 +41,32 @@ class TaskSerializerTestCase(TestCase):
 
     def test_project_field(self):
         data = self.serializer.data
-        self.assertEqual(data['project'], self.project)
+        self.assertEqual(data['project'], self.project.id)
+
+    def test_owner_field(self):
+        data = self.serializer.data
+        self.assertEqual(data['owner'], self.user.id)
+
+
+class ProjectSerializerTestCase(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="test", password="test")
+        self.project_attributes = {
+            'name': "test_project",
+            'owner': self.user
+        }
+        self.project = Project.objects.create(**self.project_attributes)
+        self.serializer = ProjectSerializer(instance=self.project)
+
+    def test_contains_expected_fields(self):
+        data = self.serializer.data
+        self.assertEqual(set(data.keys()),
+                         set(['id', 'name', 'tasks', 'owner']))
+
+    def test_name_field(self):
+        data = self.serializer.data
+        self.assertEqual(data['name'], self.project_attributes['name'])
 
     def test_owner_field(self):
         data = self.serializer.data
@@ -52,8 +80,8 @@ class UserSerializerTestCase(TestCase):
                                 'email': "test@email.com",
                                 'password': "test"}
         self.serializer_user_attributes = {'username': "test2",
-                                                   'email': "test2@email.com",
-                                                   'password': "test2"}
+                                           'email': "test2@email.com",
+                                           'password': "test2"}
         self.user = User.objects.create_user(**self.user_attributes)
         self.serializer = UserSerializer(instance=self.user)
 

@@ -2,7 +2,7 @@ import re
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from your_todoer_api.models import Task
+from your_todoer_api.models import Task, Project
 
 
 def validate_username(value):
@@ -43,6 +43,15 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id', 'title', 'is_completed', 'project', 'owner']
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = ['id', 'name', 'tasks', 'owner']
+
 
 
 class UserSerializer(serializers.ModelSerializer):
