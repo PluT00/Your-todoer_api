@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 from your_todoer_api.views import (UserListAPIView, UserCreateAPIView,
-                                   UserDetailAPIView)
+                                   UserDetailAPIView, ProjectListAPIView,
+                                   ProjectCreateAPIView, ProjectDetailAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', UserListAPIView.as_view()),
     path('api/user/create/', UserCreateAPIView.as_view()),
-    path('api/user/<int:pk>/', UserDetailAPIView.as_view())
+    path('api/user/<int:pk>/', UserDetailAPIView.as_view()),
+    path('api/projects/', ProjectListAPIView.as_view()),
+    path('api/projects/create/', ProjectCreateAPIView.as_view()),
+    path('api/projects/<int:pk>/', ProjectDetailAPIView.as_view()),
 ]
