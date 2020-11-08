@@ -42,7 +42,7 @@ def validate_password(value):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'title', 'is_completed', 'owner']
+        fields = ['id', 'title', 'is_completed', 'project', 'owner']
 
 
 class UserSerializer(serializers.ModelSerializer):

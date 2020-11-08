@@ -36,7 +36,11 @@ class TaskSerializerTestCase(TestCase):
         self.assertEqual(
             data['is_completed'], self.task_attributes['is_completed'])
 
-    def test_uesr_field(self):
+    def test_project_field(self):
+        data = self.serializer.data
+        self.assertEqual(data['project'], self.project)
+
+    def test_owner_field(self):
         data = self.serializer.data
         self.assertEqual(data['owner'], self.user.id)
 
