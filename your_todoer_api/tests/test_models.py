@@ -57,3 +57,9 @@ class ProjectModelTestCase(TestCase):
     def test_owner_field(self):
         related_model = self.project._meta.get_field('owner').related_model
         self.assertEqual(related_model, User)
+
+    def test__str__method(self):
+        self.assertEqual(
+            self.project.__str__(),
+            f'{self.project.owner.username} | {self.project.name}'
+        )

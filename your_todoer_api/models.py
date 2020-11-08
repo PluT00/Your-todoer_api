@@ -8,6 +8,9 @@ class Project(models.Model):
                               on_delete=models.CASCADE,
                               related_name="projects")
 
+    def __str__(self):
+        return f'{self.owner.username} | {self.name}'
+
 
 class Task(models.Model):
     title = models.CharField(max_length=1500)
