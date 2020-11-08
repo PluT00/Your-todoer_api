@@ -13,14 +13,14 @@ class TaskSerializerTestCase(TestCase):
         self.user = User.objects.create_user(username="test", password="test")
         self.task_attributes = {'title': "Test",
                                 'is_completed': False,
-                                'user': self.user}
+                                'owner': self.user}
         self.task = Task.objects.create(**self.task_attributes)
         self.serializer = TaskSerializer(instance=self.task)
 
     def test_contains_expected_fields(self):
         data = self.serializer.data
         self.assertEqual(set(data.keys()),
-                             set(['id', 'title', 'is_completed', 'user']))
+                             set(['id', 'title', 'is_completed', 'owner']))
 
     def test_title_field(self):
         data = self.serializer.data
@@ -33,7 +33,7 @@ class TaskSerializerTestCase(TestCase):
 
     def test_uesr_field(self):
         data = self.serializer.data
-        self.assertEqual(data['user'], self.user.id)
+        self.assertEqual(data['owner'], self.user.id)
 
 
 class UserSerializerTestCase(TestCase):
