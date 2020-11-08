@@ -14,7 +14,6 @@ class TaskModelTestCase(TestCase):
         )
         self.task = Task.objects.create(
             title="test_task",
-            is_completed=False,
             project=self.project,
             owner=self.user
         )
@@ -22,10 +21,6 @@ class TaskModelTestCase(TestCase):
     def test_title_field(self):
         max_length = self.task._meta.get_field('title').max_length
         self.assertEqual(max_length, 1500)
-
-    def test_is_completed_field(self):
-        default = self.task._meta.get_field('is_completed').default
-        self.assertEqual(default, False)
 
     def test_owner_field(self):
         related_model = self.task._meta.get_field('owner').related_model

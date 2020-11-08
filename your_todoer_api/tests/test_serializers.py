@@ -18,7 +18,6 @@ class TaskSerializerTestCase(TestCase):
             owner=self.user
         )
         self.task_attributes = {'title': "Test",
-                                'is_completed': False,
                                 'project': self.project,
                                 'owner': self.user}
         self.task = Task.objects.create(**self.task_attributes)
@@ -27,17 +26,12 @@ class TaskSerializerTestCase(TestCase):
     def test_contains_expected_fields(self):
         data = self.serializer.data
         self.assertEqual(set(data.keys()),
-                         set(['id', 'title', 'is_completed', 'project',
+                         set(['id', 'title', 'project',
                               'owner']))
 
     def test_title_field(self):
         data = self.serializer.data
         self.assertEqual(data['title'], self.task_attributes['title'])
-
-    def test_is_completed_field(self):
-        data = self.serializer.data
-        self.assertEqual(
-            data['is_completed'], self.task_attributes['is_completed'])
 
     def test_project_field(self):
         data = self.serializer.data
