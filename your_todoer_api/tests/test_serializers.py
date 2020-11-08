@@ -35,7 +35,10 @@ class TaskSerializerTestCase(TestCase):
 
     def test_project_field(self):
         data = self.serializer.data
+        read_only = self.serializer.get_fields()['project'].read_only
+
         self.assertEqual(data['project'], self.project.id)
+        self.assertEqual(read_only, True)
 
     def test_owner_field(self):
         data = self.serializer.data
