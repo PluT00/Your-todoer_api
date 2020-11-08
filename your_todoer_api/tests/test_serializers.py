@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.db.utils import IntegrityError
 from rest_framework import serializers
 
-from your_todoer_api.models import Task
+from your_todoer_api.models import Task, Project
 from your_todoer_api.serializers import UserSerializer, TaskSerializer
 
 
@@ -11,8 +11,13 @@ class TaskSerializerTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username="test", password="test")
+        self.project = Project.objects.create(
+            name="test_project",
+            owner=self.user
+        )
         self.task_attributes = {'title': "Test",
                                 'is_completed': False,
+                                'project': self.project,
                                 'owner': self.user}
         self.task = Task.objects.create(**self.task_attributes)
         self.serializer = TaskSerializer(instance=self.task)
