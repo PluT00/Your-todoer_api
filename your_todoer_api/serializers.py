@@ -11,7 +11,7 @@ def validate_username(value):
     """
     check_query = User.objects.filter(username__iexact=value)
     if len(check_query) > 0:
-        raise serializers.ValidationError('A user with this name already exists')
+        raise serializers.ValidationError('A user with this name already exists.')
     return value
 
 
@@ -21,7 +21,7 @@ def validate_email(value):
     """
     check_query = User.objects.filter(email__iexact=value)
     if len(check_query) > 0:
-        raise serializers.ValidationError('A user with this email already exists')
+        raise serializers.ValidationError('A user with this email already exists.')
     return value
 
 def validate_password(value):
@@ -33,9 +33,9 @@ def validate_password(value):
     """
     validation_pattern = r"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{8,64}$"
     if not re.match(validation_pattern, value):
-        raise serializers.ValidationError("Password must be at least 8"
-                                          "characters long, have one capital,"
-                                          "one lowercase letters and one digit")
+        raise serializers.ValidationError("Password must be at least 8 "
+                                          "characters long, have one capital, "
+                                          "one lowercase letters and one digit.")
     return value
 
 
