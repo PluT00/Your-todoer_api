@@ -43,6 +43,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id', 'title', 'project', 'owner']
+        read_only_fields = ['owner']
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -51,7 +52,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'name', 'tasks', 'owner']
-
+        read_only_fields = ['owner']
 
 
 class UserSerializer(serializers.ModelSerializer):

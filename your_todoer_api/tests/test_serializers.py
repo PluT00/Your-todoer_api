@@ -39,7 +39,10 @@ class TaskSerializerTestCase(TestCase):
 
     def test_owner_field(self):
         data = self.serializer.data
+        read_only = self.serializer.get_fields()['owner'].read_only
+
         self.assertEqual(data['owner'], self.user.id)
+        self.assertEqual(read_only, True)
 
 
 class ProjectSerializerTestCase(TestCase):
@@ -64,7 +67,10 @@ class ProjectSerializerTestCase(TestCase):
 
     def test_owner_field(self):
         data = self.serializer.data
+        read_only = self.serializer.get_fields()['owner'].read_only
+
         self.assertEqual(data['owner'], self.user.id)
+        self.assertEqual(read_only, True)
 
 
 class UserSerializerTestCase(TestCase):
@@ -104,6 +110,7 @@ class UserSerializerTestCase(TestCase):
 
     def test_projects_field(self):
         read_only = self.serializer.get_fields()['projects'].read_only
+        self.assertEqual(read_only, True)
 
     def test_tasks_field(self):
         read_only = self.serializer.get_fields()['tasks'].read_only
