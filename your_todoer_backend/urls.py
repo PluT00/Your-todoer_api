@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from your_todoer_api.views import (UserListAPIView, UserCreateAPIView,
+                                   UserDetailAPIView)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/user/', UserListAPIView.as_view()),
+    path('api/user/create/', UserCreateAPIView.as_view()),
+    path('api/user/<int:pk>/', UserDetailAPIView.as_view())
 ]
