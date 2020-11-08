@@ -7,9 +7,7 @@ class IsAnonymous(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        if request.user.is_anonymous:
-            return True
-        return False
+        return request.user.is_anonymous
 
 
 class IsOwner(permissions.BasePermission):
