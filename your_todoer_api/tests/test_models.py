@@ -36,8 +36,10 @@ class TaskModelTestCase(TestCase):
         self.assertEqual(related_model, Project)
 
     def test__str__method(self):
-        self.assertEqual(self.task.__str__(),
-                         f'{self.task.id} | {self.task.title}')
+        self.assertEqual(
+            self.task.__str__(),
+            f'{self.task.owner.username} | {self.task.project.name}:{self.task.title}'
+        )
 
 
 class ProjectModelTestCase(TestCase):

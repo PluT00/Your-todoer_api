@@ -20,4 +20,4 @@ class Task(models.Model):
                              related_name="tasks")
 
     def __str__(self):
-        return f'{self.id} | {self.title}'
+        return f'{self.owner.username} | {self.project.name}:{self.title}'
