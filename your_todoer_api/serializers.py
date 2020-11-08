@@ -46,6 +46,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    projects = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     email = serializers.EmailField(validators=[validate_email])
 
@@ -75,7 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'tasks', 'email', 'password']
+        fields = ['id', 'username', 'projects', 'tasks', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True,
                                      'validators': [validate_password],
                                      'style': {'input_type': 'password'}},

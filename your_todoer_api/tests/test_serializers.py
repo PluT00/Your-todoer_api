@@ -56,7 +56,7 @@ class UserSerializerTestCase(TestCase):
     def test_contains_expected_fields(self):
         data = self.serializer.data
         self.assertEqual(set(data.keys()),
-                         set(['id', 'username', 'tasks', 'email']))
+                         set(['id', 'username', 'projects', 'tasks', 'email']))
 
     def test_username_field(self):
         data = self.serializer.data
@@ -75,6 +75,9 @@ class UserSerializerTestCase(TestCase):
         self.assertEqual(write_only, True)
         self.assertEqual(required, True)
         self.assertEqual(allow_blank, False)
+
+    def test_projects_field(self):
+        read_only = self.serializer.get_fields()['projects'].read_only
 
     def test_tasks_field(self):
         read_only = self.serializer.get_fields()['tasks'].read_only
