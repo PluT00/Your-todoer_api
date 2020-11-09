@@ -18,7 +18,9 @@ from django.urls import path
 
 from your_todoer_api.views import (UserListAPIView, UserCreateAPIView,
                                    UserDetailAPIView, ProjectListAPIView,
-                                   ProjectCreateAPIView, ProjectDetailAPIView)
+                                   ProjectCreateAPIView, ProjectDetailAPIView,
+                                   TaskListAPIView, TaskCreateAPIView,
+                                   TaskDetailAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +30,9 @@ urlpatterns = [
     path('api/projects/', ProjectListAPIView.as_view()),
     path('api/projects/create/', ProjectCreateAPIView.as_view()),
     path('api/projects/<int:pk>/', ProjectDetailAPIView.as_view()),
+    path('api/projects/<int:project_pk>/tasks/', TaskListAPIView.as_view()),
+    path('api/projects/<int:project_pk>/tasks/create/',
+         TaskCreateAPIView.as_view()),
+    path('api/projects/<int:project_pk>/tasks/<int:pk>/',
+         TaskDetailAPIView.as_view()),
 ]
