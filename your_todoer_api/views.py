@@ -14,21 +14,12 @@ from your_todoer_api.serializers import (UserSerializer,
 from your_todoer_api.permissions import IsAnonymous, IsOwner
 
 
-class UserListAPIView(ListAPIView):
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        current_user = self.request.user
-        return User.objects.filter(pk=current_user.pk)
-
-
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAnonymous]
 
 
-class UserDetailAPIView(RetrieveUpdateDestroyAPIView):
+class UserAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 

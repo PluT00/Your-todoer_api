@@ -16,21 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from your_todoer_api.views import (UserListAPIView, UserCreateAPIView,
-                                   UserDetailAPIView, ProjectListAPIView,
-                                   ProjectCreateAPIView, ProjectDetailAPIView,
-                                   TaskListAPIView, TaskCreateAPIView,
-                                   TaskDetailAPIView)
+from your_todoer_api.views import (UserAPIView, UserCreateAPIView,
+                                   ProjectListAPIView,ProjectCreateAPIView,
+                                   ProjectDetailAPIView, TaskListAPIView,
+                                   TaskCreateAPIView,TaskDetailAPIView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/', UserListAPIView.as_view(), name="user_get_url"),
+    path('api/user/', UserAPIView.as_view(), name="user_url"),
     path('api/user/create/',
          UserCreateAPIView.as_view(),
          name="user_create_url"),
-    path('api/user/<int:pk>/',
-         UserDetailAPIView.as_view(),
-         name="user_retrieve_url"),
     path('api/projects/',
          ProjectListAPIView.as_view(),
          name="projects_list_url"),

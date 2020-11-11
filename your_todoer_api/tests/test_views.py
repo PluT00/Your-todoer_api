@@ -22,26 +22,11 @@ class UserViewsTestCase(TestCase):
         }
         self.user = User.objects.create_user(**self.user_credentials)
         self.client.login(**self.user_credentials)
-        not_listed_user = User.objects.create(username="not_listed")
         self.new_user_data = {
             'username': 'test2',
             'email': 'test@email.com',
             'password': 'NewTestPass1'
         }
-
-    def test_user_get_view(self):
-        response = self.client.get(reverse('user_get_url'))
-        serializer = UserSerializer(self.user)
-        response_content = JSONRenderer().render([serializer.data])
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, response_content)
-
-    def test_user_get_view_anonymous(self):
-        self.client.logout()
-        response = self.client.get(reverse('user_get_url'))
-
-        self.assertEqual(response.status_code, 403)
 
     def test_user_create_view(self):
         self.client.logout()
@@ -60,8 +45,8 @@ class UserViewsTestCase(TestCase):
 
         self.assertEqual(response.status_code, 403)
 
-    def test_user_retrieve_view(self):
-        response = self.client.get(reverse('user_retrieve_url',
+    def test_user_view(self):
+        response = self.client.get(reverse('user_url',
                                            kwargs={'pk': self.user.id}))
         serializer = UserSerializer(self.user)
         response_content = JSONRenderer().render(serializer.data)
@@ -69,9 +54,9 @@ class UserViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, response_content)
 
-    def test_user_retrieve_view_anonymous(self):
+    def test_user_view_anonymous(self):
         self.client.logout()
-        response = self.client.get(reverse('user_retrieve_url',
+        response = self.client.get(reverse('user_url',
                                            kwargs={'pk': self.user.id}))
 
         self.assertEqual(response.status_code, 403)
