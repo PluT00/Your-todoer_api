@@ -18,7 +18,7 @@ services:
     postgres:
         image: postgres:13.1
         restart: always
-        name: todo-app
+        name: postgres-todo-db
         volumes:
             - todo-postgres-data:/var/lib/postgres/data
         environment:
