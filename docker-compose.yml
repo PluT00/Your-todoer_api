@@ -5,7 +5,6 @@ services:
         image: python:3.9
         command: sh -c "pip3 install -r requirements.txt && python3 manage.py runserver 0.0.0.0:8000"
         restart: always
-        name: todo-app
         ports:
             - 8000:8000
         working_dir: /app
@@ -18,7 +17,6 @@ services:
     postgres:
         image: postgres:13.1
         restart: always
-        name: postgres-todo-db
         volumes:
             - todo-postgres-data:/var/lib/postgres/data
         environment:
