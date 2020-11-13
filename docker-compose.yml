@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+    todo-app:
+        image: python:3.9
+        command: sh -c "pip3 install -r requirements.txt && python3 manage.py runserver 0.0.0.0:8000"
+        restart: always
+        name: todo-app
+        ports:
+            - 8000:8000
+        working_dir: /app
+        volumes:
+            - ./:/app
+        env_file:
+            - .env
+        depends_on:
+            - postgres
+    postgres:
+        image: postgres:13.1
+        restart: always
+        name: todo-app
+        volumes:
+            - todo-postgres-data:/var/lib/postgres/data
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+
+volumes:
+    todo-postgres-data:
