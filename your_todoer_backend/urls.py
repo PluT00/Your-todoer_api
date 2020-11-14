@@ -23,7 +23,7 @@ from your_todoer_api.views import (UserAPIView, UserCreateAPIView,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/', UserAPIView.as_view(), name="user_url"),
+    path('api/user/<int:pk>/', UserAPIView.as_view(), name="user_url"),
     path('api/user/create/',
          UserCreateAPIView.as_view(),
          name="user_create_url"),
