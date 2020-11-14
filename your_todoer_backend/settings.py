@@ -121,6 +121,9 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'your_todoer_api.utils.custom_jwt_reponse_payload_handler',
+
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=24),
     'JWT_AUTH_COOKIE': 'authentication',
 }
