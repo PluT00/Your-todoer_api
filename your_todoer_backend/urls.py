@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework_jwt.views import obtain_jwt_token
 
 from your_todoer_api.views import (UserAPIView, UserCreateAPIView,
                                    ProjectListAPIView,ProjectCreateAPIView,
@@ -23,6 +24,7 @@ from your_todoer_api.views import (UserAPIView, UserCreateAPIView,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token-auth/', obtain_jwt_token),
     path('api/user/<int:pk>/', UserAPIView.as_view(), name="user_url"),
     path('api/user/create/',
          UserCreateAPIView.as_view(),
